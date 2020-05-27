@@ -32,7 +32,7 @@ extension URLSession: Session {
             request.httpBody = data
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-            request.addValue("DD-API-KEY", forHTTPHeaderField: key)
+            request.addValue(key, forHTTPHeaderField: "DD-API-KEY")
 
             let task = dataTask(with: request) {data, response, error in
                 if let error = error {
