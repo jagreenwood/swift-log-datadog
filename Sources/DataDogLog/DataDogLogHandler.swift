@@ -24,7 +24,7 @@ public struct DataDogLogHandler: LogHandler {
         // Merge metadata, overriding dupliates with new value
         let mergedMetadata = metadata.map { self.metadata.merging($0) { $1 } } ?? self.metadata
         let ddMessage = Message(level: level, message: "\(message)")
-        let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { " \($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
+        let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { "\($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
 
         session.send(log, key: key) { result in
             if case .failure(let message) = result {
