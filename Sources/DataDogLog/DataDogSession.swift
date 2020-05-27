@@ -14,7 +14,7 @@ import Logging
 typealias StatusCode = Int
 
 protocol Session {
-    func send(_ log: Log, handler: @escaping (Result<StatusCode, Error>) -> ())
+    func send(_ log: Log, key: String, handler: @escaping (Result<StatusCode, Error>) -> ())
 }
 
 extension String: Error {}
@@ -23,7 +23,7 @@ extension Optional: Error where Wrapped == String {}
 extension URLSession: Session {
     static let url = URL(string: "https://http-intake.logs.datadoghq.com/v1/input")!
 
-    func send(_ log: Log, handler: @escaping (Result<StatusCode, Error>) -> ()) {
+    func send(_ log: Log, key: String, handler: @escaping (Result<StatusCode, Error>) -> ()) {
         do {
             let data = try JSONEncoder().encode(log)
 
@@ -32,6 +32,7 @@ extension URLSession: Session {
             request.httpBody = data
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("DD-API-KEY", forHTTPHeaderField: key)
 
             let task = dataTask(with: request) {data, response, error in
                 if let error = error {

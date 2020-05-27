@@ -9,11 +9,13 @@ public struct DataDogLogHandler: LogHandler {
     public var logLevel = Logger.Level.info
     public var label: String
     public var hostname: String?
+    internal let key: String
 
     var session: Session = URLSession.shared
 
-    public init(label: String, hostname: String? = nil) {
+    public init(label: String, key: String, hostname: String? = nil) {
         self.label = label
+        self.key = key
         self.hostname = hostname
     }
 
@@ -24,7 +26,7 @@ public struct DataDogLogHandler: LogHandler {
         let ddMessage = Message(level: level, message: "\(message)")
         let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { " \($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
 
-        session.send(log) { result in
+        session.send(log, key: key) { result in
             if case .failure(let message) = result {
                 debugPrint(message)
             }
