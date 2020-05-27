@@ -4,6 +4,8 @@
 ![Release](https://img.shields.io/github/v/tag/jagreenwood/swift-log-data-dog?label=release&logo=github)
 ![Unit Test](https://github.com/jagreenwood/swift-log-data-dog/workflows/Unit%20Test/badge.svg)
 
+This package implements a handler for [swift-log](https://github.com/apple/swift-log) which will send log messages to the [Datadog's](https://www.datadoghq.com) Log Management service.
+
 ## Usage
 
 ###  Add Package 📦
@@ -19,7 +21,7 @@ Add `DataDogLog`  to your target dependencies:
 .product(name: "DataDogLog", package: "swift-log-data-dog")
 ```
 
-### Configure
+### Configure ⚙️
 
 Configure the logger by bootstrapping a `DataDogLogHandler` instance.
 
@@ -37,7 +39,7 @@ LoggingSystem.bootstrap {
 }
 ```
 
-### Logging
+### Logging 🌲
 
 To send logs to Datadog, initialize a `Logger` instance and send a message with optional additional metadata:
 
