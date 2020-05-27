@@ -16,7 +16,7 @@ class TestSession: Session {
 }
 
 final class DataDogLogTests: XCTestCase {
-    func textLog() {
+    func testLog() {
         let expectedMessage = "Testing swift-log-data-dog"
         let expectedSource = "com.swift-log"
         let expectedHostname = "xctest"
@@ -39,6 +39,6 @@ final class DataDogLogTests: XCTestCase {
     }
 
     static var allTests = [
-        ("textLog", textLog),
+        ("testLog", testLog),
     ]
 }
