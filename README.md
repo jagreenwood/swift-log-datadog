@@ -12,13 +12,13 @@ This package implements a handler for [swift-log](https://github.com/apple/swift
 Integrate the `DataDogLog` package as a dependency with Swift Package Manager. Add the following to `Package.swift`:
 
 ```swift
-.package(url: "git@github.com:jagreenwood/swift-log-data-dog.git", from: "0.0.1")
+.package(url: "git@github.com:jagreenwood/swift-log-datadog.git", from: "0.0.1")
 ```
 
 Add `DataDogLog`  to your target dependencies:
 
 ```swift
-.product(name: "DataDogLog", package: "swift-log-data-dog")
+.product(name: "DataDogLog", package: "swift-log-datadog")
 ```
 
 ### Configure ⚙️
