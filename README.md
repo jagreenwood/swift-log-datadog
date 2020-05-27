@@ -9,13 +9,13 @@
 ###  Add Package 📦
 Integrate the `DataDogLog` package as a dependency with Swift Package Manager. Add the following to `Package.swift`:
 
-```
+```swift
 .package(url: "git@github.com:jagreenwood/swift-log-data-dog.git", from: "0.0.1")
 ```
 
 Add `DataDogLog`  to your target dependencies:
 
-```
+```swift
 .product(name: "DataDogLog", package: "swift-log-data-dog")
 ```
 
@@ -23,7 +23,7 @@ Add `DataDogLog`  to your target dependencies:
 
 Configure the logger by bootstrapping a `DataDogLogHandler` instance.
 
-```
+```swift
 import DataDogLog
 
 // add handler to logging system
@@ -41,7 +41,7 @@ LoggingSystem.bootstrap {
 
 To send logs to Datadog, initialize a `Logger` instance and send a message with optional additional metadata:
 
-```
+```swift
 import DataDogLog
 
 let logger = Logger(label: "com.swift-log.awesome-app")
@@ -50,7 +50,7 @@ logger.error("unfortunate error", metadata: ["request-id": "abc-123"])
 
 This call will send the following payload to Datadog:
 
-```
+```swift
 {
     "message": "2020-05-27T06:37:17-0400 ERROR: unfortunate error",
     "hostname": "hostname",
