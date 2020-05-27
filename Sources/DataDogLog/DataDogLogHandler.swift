@@ -20,9 +20,9 @@ public struct DataDogLogHandler: LogHandler {
     }
 
     public func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
-
-        // Merge metadata, overriding dupliates with new value
-        let mergedMetadata = metadata.map { self.metadata.merging($0) { $1 } } ?? self.metadata
+        let callsite: [String: Logger.MetadataValue] = ["callsite": "\(function):\(line)"]
+        let logMetadata = metadata.map { $0.merging(callsite) { $1 } } ?? callsite
+        let mergedMetadata = self.metadata.merging(logMetadata) { $1 }
         let ddMessage = Message(level: level, message: "\(message)")
         let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { "\($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
 
