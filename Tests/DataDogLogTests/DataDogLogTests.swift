@@ -20,7 +20,7 @@ final class DataDogLogTests: XCTestCase {
         let expectedMessage = "Testing swift-log-data-dog"
         let expectedSource = "com.swift-log"
         let expectedHostname = "xctest"
-        let expectedTags = "foo:bar,log:swift"
+        let expectedTags = "callsite:test-function:100,foo:bar,log:swift"
 
         var handler = DataDogLogHandler(label: expectedSource, key: "", hostname: expectedHostname)
         handler.metadata = ["foo":"bar"]
