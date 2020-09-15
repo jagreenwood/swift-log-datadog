@@ -60,3 +60,11 @@ This call will send the following payload to Datadog:
     "ddtags": "callsite:testLog():39,foo:bar,request-id:abc-123"
 }
 ```
+
+### Select Region
+
+The Datadog API uses a different URL in the EU region compared to the US. If your account was created using Datadog EU, you need to set the `region` option when initializing `DataDogLogHandler`:
+
+```swift
+DataDogLogHandler(label: $0, key: "xxx", hostname: "hostname", region: .EU)
+```
