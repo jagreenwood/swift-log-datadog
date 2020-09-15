@@ -10,13 +10,16 @@ public struct DataDogLogHandler: LogHandler {
     public var label: String
     public var hostname: String?
     internal let key: String
+    // Region for URL
+    internal let region: Region
 
     var session: Session = URLSession.shared
 
-    public init(label: String, key: String, hostname: String? = nil) {
+    public init(label: String, key: String, hostname: String? = nil, region: Region = .US) {
         self.label = label
         self.key = key
         self.hostname = hostname
+        self.region = region
     }
 
     public func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
@@ -26,7 +29,7 @@ public struct DataDogLogHandler: LogHandler {
         let ddMessage = Message(level: level, message: "\(message)")
         let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { "\($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
 
-        session.send(log, key: key) { result in
+        session.send(log, key: key, region: region) { result in
             if case .failure(let message) = result {
                 debugPrint(message)
             }

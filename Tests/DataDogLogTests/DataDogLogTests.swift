@@ -7,7 +7,7 @@ class TestSession: Session {
     var hostname: String?
     var message: String?
 
-    func send(_ log: Log, key: String, handler: @escaping (Result<StatusCode, Error>) -> ()) {
+    func send(_ log: Log, key: String, region: Region, handler: @escaping (Result<StatusCode, Error>) -> ()) {
         source = log.ddsource
         tags = log.ddtags
         hostname = log.hostname
@@ -36,6 +36,18 @@ final class DataDogLogTests: XCTestCase {
         XCTAssertEqual(expectedSource, session.source, "Expected \(expectedSource), result was \(String(describing: session.source))")
         XCTAssertEqual(expectedHostname, session.hostname, "Expected \(expectedHostname), result was \(String(describing: session.hostname))")
         XCTAssertEqual(expectedTags, session.tags, "Expected \(expectedTags), result was \(String(describing: session.tags))")
+    }
+    
+    func testRegionURL() {
+        let euLogHandler = DataDogLogHandler(label: "test", key: "test", region: .EU)
+        let usLogHandler = DataDogLogHandler(label: "test", key: "test", region: .US)
+        let defaultLogHandler = DataDogLogHandler(label: "test", key: "test")
+        
+        XCTAssert(euLogHandler.region == .EU)
+        XCTAssert(euLogHandler.region.getURL().absoluteString == "https://http-intake.logs.datadoghq.eu/v1/input")
+        XCTAssert(usLogHandler.region == .US)
+        XCTAssert(usLogHandler.region.getURL().absoluteString == "https://http-intake.logs.datadoghq.com/v1/input")
+        XCTAssert(defaultLogHandler.region == .US)
     }
 
     static var allTests = [
