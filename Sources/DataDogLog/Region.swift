@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Hannes Hertach on 15.09.20.
-//
-
 import Foundation
 
 public enum Region {
