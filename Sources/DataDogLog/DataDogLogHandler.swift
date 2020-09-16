@@ -23,7 +23,7 @@ public struct DataDogLogHandler: LogHandler {
     }
 
     public func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
-        let callsite: [String: Logger.MetadataValue] = ["callsite": "\(function):\(line)"]
+        let callsite: [String: Logger.MetadataValue] = ["callsite": "\(function):\(line) in \(file)"]
         let logMetadata = metadata.map { $0.merging(callsite) { $1 } } ?? callsite
         let mergedMetadata = self.metadata.merging(logMetadata) { $1 }
         let ddMessage = Message(level: level, message: "\(message)")
