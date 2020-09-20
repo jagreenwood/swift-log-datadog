@@ -27,7 +27,7 @@ public struct DataDogLogHandler: LogHandler {
         let logMetadata = metadata.map { $0.merging(callsite) { $1 } } ?? callsite
         let mergedMetadata = self.metadata.merging(logMetadata) { $1 }
         let ddMessage = Message(level: level, message: "\(message)")
-        let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { "\($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)")
+        let log = Log(ddsource: label, ddtags: "\(mergedMetadata.prettified.map { "\($0)" } ?? "")", hostname: self.hostname ?? "", message: "\(ddMessage)", status: "\(level)")
 
         session.send(log, key: key, region: region) { result in
             if case .failure(let message) = result {
