@@ -52,16 +52,17 @@ logger.error("unfortunate error", metadata: ["request-id": "abc-123"])
 
 This call will send the following payload to Datadog:
 
-```swift
+```json
 {
     "message": "2020-05-27T06:37:17-0400 ERROR: unfortunate error",
     "hostname": "hostname",
     "ddsource": "com.swift-log.awesome-app",
-    "ddtags": "callsite:testLog():39,foo:bar,request-id:abc-123"
+    "ddtags": "callsite:testLog():39,foo:bar,request-id:abc-123",
+    "status": "error"
 }
 ```
 
-### Select Region
+### Select Region 🌎
 
 The Datadog API uses a different URL in the EU region compared to the US. If your account was created using Datadog EU, you need to set the `region` option when initializing `DataDogLogHandler`:
 
