@@ -47,7 +47,7 @@ To send logs to Datadog, initialize a `Logger` instance and send a message with 
 import DataDogLog
 
 let logger = Logger(label: "com.swift-log.awesome-app")
-logger.error("unfortunate error", metadata: ["request-id": "abc-123"])
+logger.error("unfortunate error", metadata: ["request-id": "abc-123"], source: "module-name")
 ```
 
 This call will send the following payload to Datadog:
@@ -56,9 +56,10 @@ This call will send the following payload to Datadog:
 {
     "message": "2020-05-27T06:37:17-0400 ERROR: unfortunate error",
     "hostname": "hostname",
-    "ddsource": "com.swift-log.awesome-app",
+    "ddsource": "module-name",
     "ddtags": "callsite:testLog():39,foo:bar,request-id:abc-123",
     "status": "error"
+    "service": "com.swift-log.awesome-app"
 }
 ```
 
