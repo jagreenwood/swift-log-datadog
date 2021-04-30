@@ -2,12 +2,13 @@ import Logging
 
 /// Attribute for Datadog Logs
 ///
-/// See https://docs.datadoghq.com/logs/log_collection/#reserved-attributes
+/// See https://docs.datadoghq.com/api/latest/logs/#send-logs-v1
 struct Log: Encodable {
     let ddsource: String
     let ddtags: String
     let hostname: String
     let message: String
+    let service: String
     
     /// Log Status
     ///
