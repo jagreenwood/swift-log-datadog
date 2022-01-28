@@ -65,7 +65,7 @@ This call will send the following payload to Datadog:
 
 ### Select Region 🌎
 
-The Datadog API uses a different URL in the EU region compared to the US. If your account was created using Datadog EU, you need to set the `region` option when initializing `DataDogLogHandler`:
+The Datadog API runs on multiple regions (e.g. US, EU, US3, US5, US1FED), with different API endpoints. If your account was not created in the default **US** region, you need to set the `region` option when initializing `DataDogLogHandler`:
 
 ```swift
 DataDogLogHandler(label: $0, key: "xxx", hostname: "hostname", region: .EU)
