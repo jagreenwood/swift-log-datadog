@@ -3,7 +3,7 @@ import Logging
 /// Attribute for Datadog Logs
 ///
 /// See https://docs.datadoghq.com/api/latest/logs/#send-logs-v1
-struct Log: Encodable {
+struct Log: Encodable, Sendable {
     let ddsource: String
     let ddtags: String
     let hostname: String
@@ -17,11 +17,11 @@ struct Log: Encodable {
     let status: String
 }
 
-struct Message: CustomStringConvertible {
+struct Message: CustomStringConvertible, Sendable {
     var description: String {
         "\(String.timestamp) \(level.rawValue.uppercased()): \(message)"
     }
-
+    
     let level: Logger.Level
     let message: String
 }

@@ -6,19 +6,19 @@ import Logging
 
 typealias StatusCode = Int
 
-protocol Session {
+protocol Session: Sendable {
     func send(_ log: Log, key: String, region: Region, handler: @escaping (Result<StatusCode, Error>) -> ())
 }
 
 extension String: Error {}
 extension Optional: Error where Wrapped == String {}
 
-extension URLSession: Session {
+extension URLSession: @unchecked Sendable, Session {
     func send(_ log: Log, key: String, region: Region, handler: @escaping (Result<StatusCode, Error>) -> ()) {
         do {
             let data = try JSONEncoder().encode(log)
 
-            var request = URLRequest(url: region.getURL())
+            var request = URLRequest(url: region.url)
             request.httpMethod = "POST"
             request.httpBody = data
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")

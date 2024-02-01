@@ -48,9 +48,9 @@ final class DataDogLogTests: XCTestCase {
         let defaultLogHandler = DataDogLogHandler(label: "test", key: "test")
         
         XCTAssert(euLogHandler.region == .EU)
-        XCTAssert(euLogHandler.region.getURL().absoluteString == "https://http-intake.logs.datadoghq.eu/api/v2/logs")
+        XCTAssert(euLogHandler.region.url.absoluteString == "https://http-intake.logs.datadoghq.eu/api/v2/logs")
         XCTAssert(usLogHandler.region == .US)
-        XCTAssert(usLogHandler.region.getURL().absoluteString == "https://http-intake.logs.datadoghq.com/api/v2/logs")
+        XCTAssert(usLogHandler.region.url.absoluteString == "https://http-intake.logs.datadoghq.com/api/v2/logs")
         XCTAssert(defaultLogHandler.region == .US)
     }
 
