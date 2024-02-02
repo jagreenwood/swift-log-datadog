@@ -4,6 +4,12 @@ import PackageDescription
 
 let package = Package(
     name: "swift-log-datadog",
+    platforms: [
+        .iOS(.v13),
+        .watchOS(.v6),
+        .tvOS(.v13),
+        .macOS(.v11)
+    ],
     products: [
         .library(
             name: "DataDogLog",
