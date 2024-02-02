@@ -30,14 +30,14 @@ final class DataDogLogTests: XCTestCase {
     }
 
     func testRegionURL() {
-        let euLogHandler = DataDogLogHandler(label: "test", key: "test", region: .EU)
-        let usLogHandler = DataDogLogHandler(label: "test", key: "test", region: .US)
+        let euLogHandler = DataDogLogHandler(label: "test", key: "test", site: .EU)
+        let usLogHandler = DataDogLogHandler(label: "test", key: "test", site: .US)
         let defaultLogHandler = DataDogLogHandler(label: "test", key: "test")
 
-        XCTAssert(euLogHandler.region == .EU)
-        XCTAssert(euLogHandler.region.url.absoluteString == "https://http-intake.logs.datadoghq.eu/api/v2/logs")
-        XCTAssert(usLogHandler.region == .US)
-        XCTAssert(usLogHandler.region.url.absoluteString == "https://http-intake.logs.datadoghq.com/api/v2/logs")
-        XCTAssert(defaultLogHandler.region == .US)
+        XCTAssert(euLogHandler.site == .EU)
+        XCTAssert(euLogHandler.site.url.absoluteString == "https://http-intake.logs.datadoghq.eu/api/v2/logs")
+        XCTAssert(usLogHandler.site == .US)
+        XCTAssert(usLogHandler.site.url.absoluteString == "https://http-intake.logs.datadoghq.com/api/v2/logs")
+        XCTAssert(defaultLogHandler.site == .US)
     }
 }

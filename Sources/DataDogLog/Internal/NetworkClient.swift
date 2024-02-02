@@ -29,7 +29,7 @@ final class NetworkClient: Sendable {
     }
 
     @usableFromInline
-    func send(_ log: Log, key: String, region: Region) async throws -> StatusCode {
+    func send(_ log: Log, key: String, site: Site) async throws -> StatusCode {
         let logData = try JSONEncoder().encode(log)
         let headers: Dictionary<String, String> = [
             "Content-Type" : "application/json",
@@ -37,7 +37,7 @@ final class NetworkClient: Sendable {
             "DD-API-KEY" : key
         ]
 #if os(Linux)
-        var request = HTTPClientRequest(url: region.url.absoluteString)
+        var request = HTTPClientRequest(url: site.url.absoluteString)
         request.method = .POST
         request.body = .bytes(ByteBuffer(bytes: logData))
         
@@ -48,7 +48,7 @@ final class NetworkClient: Sendable {
         let response = try await client.execute(request, timeout: .seconds(30))
         return StatusCode(value: Int(response.status.code))
 #else
-        var request = URLRequest(url: region.url)
+        var request = URLRequest(url: site.url)
         request.httpMethod = "POST"
         request.httpBody = logData
 
