@@ -1,8 +1,7 @@
 # DataDogLog 🐶
 
-![Swift](https://img.shields.io/badge/Swift-5.2-orange.svg)
-![Release](https://img.shields.io/github/v/tag/jagreenwood/swift-log-data-dog?label=release&logo=github)
-![Unit Test](https://github.com/jagreenwood/swift-log-data-dog/workflows/Unit%20Test/badge.svg)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fswift-log-datadog%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/swift-log-datadog)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fswift-log-datadog%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/swift-log-datadog)
 
 This package implements a handler for [swift-log](https://github.com/apple/swift-log) which will send log messages to the [Datadog's](https://www.datadoghq.com) Log Management service.
 
