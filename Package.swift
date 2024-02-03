@@ -1,19 +1,22 @@
-// swift-tools-version:5.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "swift-log-datadog",
+    platforms: [
+        .iOS(.v13),
+        .watchOS(.v6),
+        .tvOS(.v13),
+        .macOS(.v11)
+    ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "DataDogLog",
             targets: ["DataDogLog"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.2.0"),
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.5.0"),
     ],
     targets: [
         .target(
@@ -24,3 +27,8 @@ let package = Package(
             dependencies: ["DataDogLog"]),
     ]
 )
+
+#if os(Linux)
+package.dependencies.append(.package(url: "https://github.com/swift-server/async-http-client.git", from: "1.19.0"))
+package.targets.first { $0.name == "DataDogLog" }?.dependencies.append(.product(name: "AsyncHTTPClient", package: "async-http-client"))
+#endif
