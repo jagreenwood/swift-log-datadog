@@ -10,7 +10,7 @@ public struct DataDogLogHandler: LogHandler, Sendable {
     public var metadata = Logger.Metadata()
 
     /// The minimum log level for a message to be logged. If a log's level is more severe or equal to this value, the log will be sent. Defaults to `info`.
-    public var logLevel = Logger.Level.info
+    public var logLevel: Logger.Level
 
     /// The label to use for this handler. This is usually the service's name.
     public var label: String
@@ -29,16 +29,19 @@ public struct DataDogLogHandler: LogHandler, Sendable {
 
     /// - Parameters:
     ///   - label: The label to use for this handler
+    ///   - logLevel: The minimum log level for a message to be logged
     ///   - key: The DataDog access key
     ///   - hostname: The name of the host sending logs
     ///   - region: The DataDog region to use, defaults to `US`
     public init(
         label: String,
+        logLevel: Logger.Level = .info,
         key: String,
         hostname: String? = nil,
         site: Site = .US
     ) {
         self.label = label
+        self.logLevel = logLevel
         self.key = key
         self.hostname = hostname
         self.site = site
