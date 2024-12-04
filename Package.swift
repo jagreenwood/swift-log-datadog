@@ -25,7 +25,8 @@ let package = Package(
         .testTarget(
             name: "DataDogLogTests",
             dependencies: ["DataDogLog"]),
-    ]
+    ],
+    swiftLanguageVersions: [.version("6"), .v5]
 )
 
 #if os(Linux)

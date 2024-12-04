@@ -1,4 +1,4 @@
-name: Unit Test
+name: Test Swift 5.9
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-
+    container: swift:5.9
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Build
-      run: swift build -v
+      run: swift build
     - name: Run tests
-      run: swift test -v
+      run: swift test
