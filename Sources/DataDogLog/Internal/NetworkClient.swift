@@ -24,7 +24,7 @@ final class NetworkClient: Sendable {
 
     deinit {
 #if os(Linux)
-        client.shutdown()
+        client.shutdown { _ in }
 #endif
     }
 
