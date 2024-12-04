@@ -1,12 +1,12 @@
 {
     "name": "Swift",
-    "image": "swift:5.9.1",
+    "image": "swift:6.0",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": "false",
             "username": "vscode",
-            "userUid": "1000",
-            "userGid": "1000",
+            "userUid": "1001",
+            "userGid": "1001",
             "upgradePackages": "false"
         },
         "ghcr.io/devcontainers/features/git:1": {
